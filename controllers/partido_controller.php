@@ -63,18 +63,38 @@ class PartidoController {
             $puntajes[$jugador1]['jugados']++;
             $puntajes[$jugador2]['jugados']++;
     
-            // Asignar puntos solo al ganador
-            if ($ganador == $jugador1) {
-                if ($resultado == '2-0') {
+            // Aplicar nueva regla de puntos
+            if ($resultado == '2-0') {
+                if ($ganador == $jugador1) {
                     $puntajes[$jugador1]['puntos'] += 2;
-                } elseif ($resultado == '2-1') {
+                    $puntajes[$jugador2]['puntos'] += 0;
+                } else {
+                    $puntajes[$jugador2]['puntos'] += 2;
+                    $puntajes[$jugador1]['puntos'] += 0;
+                }
+            } elseif ($resultado == '2-1') {
+                if ($ganador == $jugador1) {
+                    $puntajes[$jugador1]['puntos'] += 2;
+                    $puntajes[$jugador2]['puntos'] += 1;
+                } else {
+                    $puntajes[$jugador2]['puntos'] += 2;
                     $puntajes[$jugador1]['puntos'] += 1;
                 }
-            } elseif ($ganador == $jugador2) {
-                if ($resultado == '0-2') {
-                    $puntajes[$jugador2]['puntos'] += 2;
-                } elseif ($resultado == '1-2') {
+            } elseif ($resultado == '1-2') {
+                if ($ganador == $jugador1) {
+                    $puntajes[$jugador1]['puntos'] += 2;
                     $puntajes[$jugador2]['puntos'] += 1;
+                } else {
+                    $puntajes[$jugador2]['puntos'] += 2;
+                    $puntajes[$jugador1]['puntos'] += 1;
+                }
+            } elseif ($resultado == '0-2') {
+                if ($ganador == $jugador1) {
+                    $puntajes[$jugador1]['puntos'] += 2;
+                    $puntajes[$jugador2]['puntos'] += 0;
+                } else {
+                    $puntajes[$jugador2]['puntos'] += 2;
+                    $puntajes[$jugador1]['puntos'] += 0;
                 }
             }
         }
